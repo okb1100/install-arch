@@ -32,10 +32,10 @@ pacstrap /mnt grub-bios
 # Keyboard, locale, time
 arch-chroot /mnt /bin/bash -c '
 if [ -b /dev/sda ]; then DISK="/dev/sda"; else DISK="/dev/vda"; fi
-echo "KEYMAP=us" > /etc/vconsole.conf
+echo "KEYMAP=tr_q-latin5" > /etc/vconsole.conf
 echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
 echo "LANG=en_US.UTF-8" > /etc/locale.conf
-ln -s /usr/share/zoneinfo/US/Eastern /etc/localtime
+ln -s /usr/share/zoneinfo/Europe/Istanbul /etc/localtime
 locale-gen
 sudo hwclock --hctosys --localtime
 
@@ -43,7 +43,7 @@ sudo hwclock --hctosys --localtime
 echo "root:1" | chpasswd
 
 # Install Grub
-grub-install --recheck $DISK"1"
+grub-install --recheck $DISK
 echo GRUB_DISABLE_SUBMENU=y >> /etc/default/grub
 grub-mkconfig -o /boot/grub/grub.cfg
 
